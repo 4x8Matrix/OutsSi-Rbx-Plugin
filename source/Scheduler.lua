@@ -9,21 +9,39 @@ function Scheduler.Prototype:setCycleDelay(value) self._delay = value end
 function Scheduler.Prototype:setCycleState(state) self._state = state end
 function Scheduler.Prototype:unbindAll() self._bindedFunctions = { } end
 
-function Scheduler.Prototype:bind(callback)
-	table.insert(self._bindedFunctions, callback)
+function Scheduler.Prototype:bindErrorHandler(callback)
+	table.insert(self._bindedFunctions.errorHandlers, callback)
 
 	return function()
-		local index = table.find(self._bindedFunctions, callback)
+		local index = table.find(self._bindedFunctions.errorHandlers, callback)
 
 		if index then
-			table.remove(self._bindedFunctions, index)
+			table.remove(self._bindedFunctions.errorHandlers, index)
+		end
+	end
+end
+
+function Scheduler.Prototype:bindCycleHandler(callback)
+	table.insert(self._bindedFunctions.cycleHandlers, callback)
+
+	return function()
+		local index = table.find(self._bindedFunctions.cycleHandlers, callback)
+
+		if index then
+			table.remove(self._bindedFunctions.cycleHandlers, index)
 		end
 	end
 end
 
 function Scheduler.Prototype:executeCycle(deltaTime)
-	for _, callback in self._bindedFunctions do
-		callback(deltaTime)
+	for _, callback in self._bindedFunctions.cycleHandlers do
+		xpcall(callback, function(exceptionMessage)
+			for _, callback in self._bindedFunctions.errorHandlers do
+				xpcall(callback, function()
+					error("[OutSi-Plugin]: Internal Cycle error in error handler!")
+				end, exceptionMessage)
+			end
+		end, deltaTime)
 	end
 end
 
@@ -42,7 +60,10 @@ function Scheduler.Interface.new()
 		_delay = 0,
 		_state = false,
 
-		_bindedFunctions = { }
+		_bindedFunctions = {
+			errorHandlers = { },
+			cycleHandlers = { }
+		}
 	}, { __index = Scheduler.Prototype })
 
 	self._cycleThread = task.spawn(function()
