@@ -3,14 +3,14 @@
 	"tree": {
 		"$className": "DataModel",
 
-		"HttpService": {
-			"$className": "HttpService",
-			"$properties": { "HttpEnabled": true }
-		},
-
 		"ServerScriptService": {
 			"$className": "ServerScriptService",
-			"$path": "source"
+			
+			"PluginFolder": {
+				"$className": "Folder",
+			
+				"OutSi": { "$path": "source" }
+			}
 		}
 	}
 }
