@@ -1,0 +1,10 @@
+[package]
+name = "matrix/outsi"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+signal = "sleitnick/signal@1.2.1"
+janitor = "howmanysmall/janitor@1.15.1"
+promise = "evaera/promise@4.0.0"
