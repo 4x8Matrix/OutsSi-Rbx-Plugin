@@ -6,7 +6,12 @@
 		"PluginFolder": {
 			"$className": "Folder",
 		
-			"OutSi": { "$path": "source" }
+			"OutSi-PluginFolder": {
+				"$className": "Folder",
+				"$path": "Source",
+			
+				"Packages": { "$path": "Packages" }
+			}
 		}
 	}
 }
