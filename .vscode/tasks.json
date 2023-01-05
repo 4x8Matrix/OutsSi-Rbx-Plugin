@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install Wally Packages",
+			"type": "shell",
+			"command": "wally install",
+			"group": { "kind": "build" },
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true
+			}
+		},
+
+		{
+			"label": "Build Binary",
+			"type": "shell",
+			"command": "rojo build default.project.json -o latest.rbxm",
+			"group": { "kind": "build" },
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true
+			}
+		},
+
+		{
+			"label": "Run Build Server",
+			"type": "shell",
+			"command": "rojo serve build.project.json",
+			"group": { "kind": "build" },
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true
+			}
+		},
+	]
+}
