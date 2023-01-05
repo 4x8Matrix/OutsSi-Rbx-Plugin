@@ -1,0 +1,6 @@
+# Wally Packages
+Packages/
+
+# Build Files
+*.rbxm
+*.lock
