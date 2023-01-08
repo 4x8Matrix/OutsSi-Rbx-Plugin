@@ -30,7 +30,7 @@ OutSi.Prototype = {
 	},
 
 	Version = "0.1.0",
-	Verbosity = true,
+	Verbosity = false,
 	Plugin = plugin;
 }
 
