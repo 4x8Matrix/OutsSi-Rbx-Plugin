@@ -5,14 +5,14 @@ local EndpointKey = require(Enumeration.EndpointKey)
 
 return {
 	[EndpointKey.EndpointStructure] = "http://%s%s",
-	[EndpointKey.EndpointUrl] = "127.0.0.1:3017",
+	[EndpointKey.EndpointUrl] = "127.0.0.1:3012",
 
 	[EndpointKey.EndpointPaths] = {
-		[EndpointType.identify] = "/api/identify",
-		[EndpointType.settings] = "/api/settings",
+		[EndpointType.identify] = "/api/v1/identify",
+		[EndpointType.settings] = "/api/v1/settings",
 
-		[EndpointType.onAction] = "/api/event/action",
-		[EndpointType.onUpload] = "/api/event/upload"
+		[EndpointType.onAction] = "/api/v1/event/action",
+		[EndpointType.onUpload] = "/api/v1/event/upload"
 	},
 
 	[EndpointKey.EndpointRequestType] = {

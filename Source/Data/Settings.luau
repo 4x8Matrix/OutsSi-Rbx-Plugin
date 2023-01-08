@@ -3,7 +3,7 @@ local Enumeration = script.Parent.Parent.Enumeration
 local SettingKey = require(Enumeration.SettingKey)
 
 return {
-	[SettingKey.HttpLimitPerSecond] = 500,
+	[SettingKey.HttpLimitPerSecond] = 500 / 2,
 	[SettingKey.HttpLimitReset] = 1,
 
 	[SettingKey.HttpResourcePercent] = 25,

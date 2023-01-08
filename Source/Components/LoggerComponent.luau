@@ -39,7 +39,7 @@ return function(OutSi)
 				[OutSi.Enumeration.LogObjectKey.MessageType] = Enum.MessageType.MessageError.Value,
 				[OutSi.Enumeration.LogObjectKey.Message] = message,
 				[OutSi.Enumeration.LogObjectKey.StackTrace] = stackTrace,
-				[OutSi.Enumeration.LogObjectKey.FilePath] = instance:GetFullName(),
+				[OutSi.Enumeration.LogObjectKey.FilePath] = instance,
 				[OutSi.Enumeration.LogObjectKey.RepeatCount] = 0,
 			})
 		end))

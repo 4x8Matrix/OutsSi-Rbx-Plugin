@@ -1,5 +1,7 @@
 return table.freeze({
-	["RunModeChanged"] = "RunModeChanged"
+	["RunModeChanged"] = "RunModeChanged",
+	["PluginDeactivated"] = "PluginDeactivated"
 }) :: {
-	RunModeChanged: string
+	RunModeChanged: string,
+	PluginDeactivated: string
 }

@@ -11,7 +11,8 @@ return function(OutSi)
 	HttpComponent.Prototype = { }
 
 	HttpComponent.ActionEnums = {
-		[OutSi.Enumeration.ActionType.RunModeChanged] = 0
+		[OutSi.Enumeration.ActionType.RunModeChanged] = 0,
+		[OutSi.Enumeration.ActionType.PluginDeactivated] = 1
 	}
 
 	function HttpComponent.Prototype:getUniqueServerId()
@@ -69,7 +70,7 @@ return function(OutSi)
 			end
 
 			if not response.Success then
-				return reject(response.Message)
+				return reject(response.StatusMessage)
 			end
 
 			if not self.isConnected then
@@ -80,7 +81,7 @@ return function(OutSi)
 
 			resolve(true)
 		end):catch(function(exception)
-			warn(string.format(OutSi.Data.ErrorMessages[OutSi.Enumeration.ErrorType.InternalPluginError]), exception)
+			warn(OutSi.Data.ErrorMessages[OutSi.Enumeration.ErrorType.InternalPluginError], exception)
 
 			task.delay(SettingsComponent:getSetting(OutSi.Enumeration.SettingKey.AttemptDelay), function()
 				self:validateConnectionAsync():await()
@@ -108,7 +109,7 @@ return function(OutSi)
 		}))
 	end
 
-	function HttpComponent.Prototype:uploadAction(actionType, actionData)
+	function HttpComponent.Prototype:uploadAction(actionType)
 		local success, isConnected = self:validateConnection():await()
 
 		if success and not isConnected then

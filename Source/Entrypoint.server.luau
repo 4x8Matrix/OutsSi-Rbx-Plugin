@@ -1,3 +1,5 @@
+local HttpService = game:GetService("HttpService")
+
 local OutSi = { }
 
 OutSi.Interface = { }
@@ -44,6 +46,12 @@ function OutSi.Prototype:initiatePlugin()
 
 	self.pluginActivated:Fire()
 	self.pluginJanitor:Add(plugin.Unloading:Connect(function()
+		local HttpComponent = self:getComponent("HttpComponent")
+
+		HttpComponent:requestAsync(self.Enumeration.EndpointType.onAction, HttpService:JSONEncode({
+			[self.Enumeration.HttpKey.ActionType] = 1
+		}))
+
 		self.pluginDeactivated:Fire()
 		self.pluginJanitor:Destroy()
 	end))
