@@ -81,7 +81,9 @@ return function(OutSi)
 
 			resolve(true)
 		end):catch(function(exception)
-			warn(OutSi.Data.ErrorMessages[OutSi.Enumeration.ErrorType.InternalPluginError], exception)
+			if OutSi.Verbosity then
+				warn(OutSi.Data.ErrorMessages[OutSi.Enumeration.ErrorType.InternalPluginError], exception)
+			end
 
 			task.delay(SettingsComponent:getSetting(OutSi.Enumeration.SettingKey.AttemptDelay), function()
 				self:validateConnectionAsync():await()

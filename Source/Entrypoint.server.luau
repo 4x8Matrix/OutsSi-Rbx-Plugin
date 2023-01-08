@@ -1,4 +1,5 @@
 local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
 
 local OutSi = { }
 
@@ -28,7 +29,8 @@ OutSi.Prototype = {
 		["Endpoint"] = require(script.Parent.Data.Endpoint)
 	},
 
-	Version = "0.0.1",
+	Version = "0.1.0",
+	Verbosity = true,
 	Plugin = plugin;
 }
 
@@ -81,4 +83,12 @@ function OutSi.Interface.new()
 	return self
 end
 
-return plugin and OutSi.Interface.new()
+if RunService:IsRunMode() then
+	return
+end
+
+if not plugin then
+	return
+end
+
+return OutSi.Interface.new()

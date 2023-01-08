@@ -53,9 +53,11 @@ return function(OutSi)
 			end
 
 			if settingsObject[OutSi.Enumeration.StorageKey.Version] ~= OutSi.Version then
-				warn(string.format(OutSi.Data.ErrorMessages[OutSi.Enumeration.ErrorType.SettingVersionMissMatch], settingKey))
-				OutSi.Plugin:SetSetting(settingKey, nil)
+				if OutSi.Verbosity then
+					warn(string.format(OutSi.Data.ErrorMessages[OutSi.Enumeration.ErrorType.SettingVersionMissMatch], settingKey))
+				end
 
+				OutSi.Plugin:SetSetting(settingKey, nil)
 				continue
 			end
 
