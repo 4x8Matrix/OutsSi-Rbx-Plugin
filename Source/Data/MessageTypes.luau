@@ -1,7 +1,6 @@
 return {
-	[Enum.MessageType.MessageError] = false,
-	[Enum.MessageType.MessageInfo] = false,
-
+	[Enum.MessageType.MessageError] = true,
+	[Enum.MessageType.MessageInfo] = true,
 	[Enum.MessageType.MessageOutput] = true,
 	[Enum.MessageType.MessageWarning] = true
 }

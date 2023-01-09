@@ -34,16 +34,6 @@ return function(OutSi)
 	end
 
 	function LoggerComponent.Prototype:bindListeners()
-		OutSi.pluginJanitor:Add(ScriptContextService.Error:Connect(function(message, stackTrace, instance)
-			self:appendMessageObject({
-				[OutSi.Enumeration.LogObjectKey.MessageType] = Enum.MessageType.MessageError.Value,
-				[OutSi.Enumeration.LogObjectKey.Message] = message,
-				[OutSi.Enumeration.LogObjectKey.StackTrace] = stackTrace,
-				[OutSi.Enumeration.LogObjectKey.FilePath] = instance,
-				[OutSi.Enumeration.LogObjectKey.RepeatCount] = 0,
-			})
-		end))
-
 		OutSi.pluginJanitor:Add(LogService.MessageOut:Connect(function(message, messageType)
 			if not OutSi.Data.MessageTypes[messageType] then
 				return
